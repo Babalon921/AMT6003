@@ -19,6 +19,11 @@
 •	Numpy
 •	OS
 ```
+## pip install command:
+```bash
+pip3 install functools, matplotlib, sounddevice, soundfile, tqdm, pyloudnorm, librosa, numpy
+```
+
 
 Developed By Harry Gray @ University Of Plymouth
 
