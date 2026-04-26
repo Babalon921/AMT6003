@@ -2,7 +2,7 @@
 
 # AMT6003 MIR TOOL
 
-## Full Commented & Optamised
+## Full Commented & Optimised
 
 ### Libarys Used:
 
