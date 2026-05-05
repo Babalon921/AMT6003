@@ -56,7 +56,8 @@ def analyse_track(path):
 
       step("Loading Selected Audio", 0)
       y, sr = librosa.load(path, sr=None); a_data, a_sr = y, sr; p.update(20) #load audio y = audio signal, sr = sample rate of file, sr = none (keep sample rate)
-      print(f"Loaded: {len(y)} samples at {sr} HZ")
+      print(f"Loaded: {len(y)} samples {sr} in HZ")
+
       #https://librosa.org/doc/latest/generated/librosa.load.html
 
       step("Beats Are Being Detected", 0)
@@ -113,6 +114,7 @@ def analyse_track(path):
 def render(y, sr, tempo, bt, mfccs, S_db, loudness, path, S_C, ZCR):
   #ax1 ax2 are the axes of the graph, needle1 needle2 are the cursors, bg_cache backgrounded / cached resources
   #a_dur is total track length, t time axis, beat_times used for triggering flash, last_beat allows for resetting the loop
+
   global a_dur, needle1, needle2, bg_cache, ax1, ax2, beat_times, last_beat
   fig.clf()
   a_dur = len(y) / sr
@@ -121,12 +123,14 @@ def render(y, sr, tempo, bt, mfccs, S_db, loudness, path, S_C, ZCR):
 
 
   #Waveform: audio amp over time, red lines are beats, matplot render.
+
   ax1 = fig.add_axes([0, 0.5, 1, 0.5])
   ax1.plot(t, y, color="#4A90D9", linewidth=0.6)
   for b in bt: ax1.axvline(x=b, color="#FF0000", linewidth=0.6, alpha=0.8)
   ax1.set_xlim(0, a_dur); ax1.axis("off")
 
   #Spectrogram
+
   ax2 = fig.add_axes([0, 0, 1, 0.5])
   librosa.display.specshow(S_db, sr=sr, x_axis="time", y_axis=None, ax=ax2)
   ax2.set_xlim(0, a_dur); ax2.axis("off")
@@ -135,6 +139,7 @@ def render(y, sr, tempo, bt, mfccs, S_db, loudness, path, S_C, ZCR):
   needle2 = ax2.axvline(x=0, color="#FF0000", linewidth=1.2, alpha=0.95, zorder=10, animated=True)## animation true enables updates
 
   #Optamised using blitting by storing as background, only the needle is redrawn graphs are not.
+
   fig.subplots_adjust(left=0, right=1, top=1, bottom=0)
   canvas.draw()
   bg_cache = canvas.copy_from_bbox(fig.bbox)
