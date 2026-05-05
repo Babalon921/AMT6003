@@ -56,13 +56,13 @@ def analyse_track(path):
 
       step("Loading Selected Audio", 0)
       y, sr = librosa.load(path, sr=None); a_data, a_sr = y, sr; p.update(20) #load audio y = audio signal, sr = sample rate of file, sr = none (keep sample rate)
-      print(f"Loaded audio: {len(y)} samples at {sr} Hz")
+      print(f"Loaded: {len(y)} samples at {sr} HZ")
       #https://librosa.org/doc/latest/generated/librosa.load.html
 
       step("Beats Are Being Detected", 0)
       tempo, bf = librosa.beat.beat_track(y=y, sr=sr) ## tempo in bpm (not completely accurate)
       bt = librosa.frames_to_time(bf, sr=sr); p.update(20) ##bt = beat time stamps useful later in vizualizing them
-      print(f"Tempo: {tempo} BPM with {len(bt)} number of beats")
+      print(f"Tempo: {tempo}, {len(bt)} number of beats")
       #https://librosa.org/doc/main/generated/librosa.beat.beat_track.html
       #https://librosa.org/doc/main/generated/librosa.frames_to_time.html
 
