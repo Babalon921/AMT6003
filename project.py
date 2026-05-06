@@ -102,7 +102,7 @@ def analyse_track(path):
     root.after(0, partial(render, y, sr, tempo, bt, mfccs, S_db, loudness, path, S_C, ZCR)) ##schedules the main rendering of the window 
   except Exception as e:
     def _on_error():
-      status_var.set(f"IF YOU READ THIS YOU SHOULDNT BE ABLE TOO")
+      status_var.set(f"ERROR")
       progress_bar.config(value=0)
     root.after(0, _on_error)
   ##exception handling should not throw errors but this keeps the script safe.
@@ -246,9 +246,10 @@ def start():
 #TKINTER CODE
 root = tk.Tk()
 root.title("HGG - MIR Tool")
-root.iconphoto(True, tk.PhotoImage(file="icon.png"))
+root.iconphoto(True, tk.PhotoImage(file="icon.png")) ## custom icon
 root.configure(bg="#000000")
 
+##styling of tkkwindow
 style = ttk.Style(); style.theme_use("clam")
 
 style.configure("TFrame", background="#000000")
@@ -293,5 +294,5 @@ fig = plt.Figure(figsize=(5,3), dpi=96, facecolor="#000000")
 plot_frame = tk.Frame(root, bg="#000000"); plot_frame.pack(fill="both", expand=True)
 canvas = FigureCanvasTkAgg(fig, master=plot_frame); canvas.get_tk_widget().pack(fill="both", expand=True)
 
-root.minsize(900, 200); root.geometry("900x300")
+root.minsize(900, 200); root.geometry("900x300") ##size of window
 root.mainloop()
